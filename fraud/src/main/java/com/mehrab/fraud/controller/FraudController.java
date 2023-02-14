@@ -4,6 +4,7 @@ package com.mehrab.fraud.controller;
 import com.mehrab.fraud.payload.response.FraudCheckResponse;
 import com.mehrab.fraud.service.FraudCheckService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

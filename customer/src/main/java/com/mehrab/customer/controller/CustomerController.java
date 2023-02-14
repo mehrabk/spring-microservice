@@ -1,6 +1,6 @@
 package com.mehrab.customer.controller;
 
-import com.mehrab.customer.payload.CustomerRegistrationRequest;
+import com.mehrab.customer.payload.request.CustomerRegistrationRequest;
 import com.mehrab.customer.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
