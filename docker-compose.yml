@@ -1,3 +1,5 @@
+# in microservice architecture database service placed independly but in here we used same database server for microservices
+
 services:
   postgres:
     container_name: postgres
