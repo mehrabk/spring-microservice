@@ -38,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         // todo: make it async send notification. i.e add to queue
-//        notificationClient.sendNotification(new NotificationRequest(customer.getId(), customer.getEmail(), String.format("Hi %s, Welcome to my miroservice", customer.getFirstName())));
+        notificationClient.sendNotification(new NotificationRequest(customer.getId(), customer.getEmail(), String.format("Hi %s, Welcome to my miroservice", customer.getFirstName())));
 
     }
 }
