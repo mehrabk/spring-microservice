@@ -1,4 +1,4 @@
-package com.mehrab.fraud.payload.response;
+package com.mehrab.clients.fraud;
 
 public record FraudCheckResponse(Boolean isFraudster) {
 }
