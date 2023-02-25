@@ -1,5 +1,6 @@
 package com.mehrab.customer.service;
 
+import com.mehrab.amqp.RabbitMQMessageProducer;
 import com.mehrab.clients.fraud.FraudCheckResponse;
 import com.mehrab.clients.fraud.FraudClient;
 import com.mehrab.clients.notification.NotificationClient;
@@ -8,6 +9,7 @@ import com.mehrab.customer.model.Customer;
 import com.mehrab.customer.payload.request.CustomerRegistrationRequest;
 import com.mehrab.customer.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,9 +17,10 @@ import org.springframework.web.client.RestTemplate;
 @AllArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 //    private final RestTemplate restTemplate;
-    private final CustomerRepository customerRepository;
+//    private final NotificationClient notificationClient;
     private final FraudClient fraudClient;
-    private final NotificationClient notificationClient;
+    private final CustomerRepository customerRepository;
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
     @Override
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
@@ -38,7 +41,8 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         // todo: make it async send notification. i.e add to queue
-        notificationClient.sendNotification(new NotificationRequest(customer.getId(), customer.getEmail(), String.format("Hi %s, Welcome to my miroservice", customer.getFirstName())));
-
+        NotificationRequest notificationRequest = new NotificationRequest(customer.getId(), customer.getEmail(), String.format("Hi %s, Welcome to my miroservice", customer.getFirstName()));
+//        notificationClient.sendNotification(notificationRequest);
+        rabbitMQMessageProducer.publish(notificationRequest, "internal.exchange", "internal.notification.routing-key");
     }
 }

@@ -14,11 +14,11 @@ public class NotificationApplication {
         SpringApplication.run(NotificationApplication.class, args);
     }
 
-    @Bean
-    CommandLineRunner commandLineRunner(RabbitMQMessageProducer producer, NotificationConfig notificationConfig) {
-        return (args) -> {
-            producer.publish(new Person("mehrab", "kor", 29), notificationConfig.getInternalExchange(), notificationConfig.getInternalNotificationRoutingKey());
-        };
-    }
-    record Person(String firstName, String lastName, int age) {}
+//    @Bean // test publish message
+//    CommandLineRunner commandLineRunner(RabbitMQMessageProducer producer, NotificationConfig notificationConfig) {
+//        return (args) -> {
+//            producer.publish(new Person("mehrab", "kor", 29), notificationConfig.getInternalExchange(), notificationConfig.getInternalNotificationRoutingKey());
+//        };
+//    }
+//    record Person(String firstName, String lastName, int age) {}
 }
