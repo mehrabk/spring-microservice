@@ -89,7 +89,7 @@
           <version>3.1.4</version>
           <configuration>
             <from>
-              <!-- hash code to set exact version -->
+              <!-- specify the base image that for our java application (adapt openjdk docker) -->
               <image>eclipse-temurin:17@sha256:2b47a8ea946ce1e5365a1562414ed576e378b7b670cadff3fb98ebecf2890cdc</image>
               <platforms>
                 <platform>
@@ -108,6 +108,7 @@
               </tags>
             </to>
           </configuration>
+          <!-- centralize this excution -->
           <executions>
             <execution>
               <phase>package</phase>
